@@ -1,34 +1,43 @@
 <template>
-    <div class="container">
-        <div id="book_covers_title"></div>
-        <div class="back">
-            <button @click="$router.go(-1)" class="backButton">Back</button>
-        </div>
-        <div>
-            <div class="singleCoverOriginal">
-                <img :src="cover.original_cover" />
-                <div class="singleCoverOriginalText">
-                    <h3>{{ cover.title }}</h3>
-                    <h4 v-if="cover.subtitle">{{ cover.subtitle }}</h4>
-                    <hr />
-                    <p class="cover_content">{{ cover.other_content }}</p>
-                    <div class="author">
-                        <p class="author_name">by {{ cover.author }}</p>
+    <div class="container" v-bind:class="[singleCover ? normalMode : hiddenMode]">
+        <!-- <div v-if="singleCover" v-bind:class="[singleCover ? normalMode : hiddenMode]" > -->
+            <div id="book_covers_title"></div>
+            <div class="back">
+                <button @click="$router.go(-1)" class="backButton">Back</button>
+            </div>
+            <div>
+                <div class="singleCoverOriginal">
+                    <img :src="cover.original_cover" />
+                    <div class="singleCoverOriginalText">
+                        <h3>{{ cover.title }}</h3>
+                        <h4 v-if="cover.subtitle">{{ cover.subtitle }}</h4>
+                        <hr style="border-top: 1px solid #aa9ac2; width: 100%;" />
+                        <p class="cover_content">{{ cover.other_content }}</p>
+                        <div class="author">
+                            <p class="author_name">by {{ cover.author }}</p>
+                        </div>
+                        <button @click="goToLink(cover.id)" class="amazonLink" v-if="cover.link">Check the book</button>
+                        <p v-else>This book is waiting for publishing</p>
                     </div>
-                    <button @click="goToLink(cover.id)" class="amazonLink" v-if="cover.link">Check the book</button>
-                    <p v-else>This book is waiting for publishing</p>
+                </div>
+                <div class="singleCoverMockups">
+                    <div class="firstHalf">
+                        <img :src="cover.mockup_1" class="topMockup" />
+                        <img :src="cover.mockup_2" class="bottomMockup" />
+                    </div>
+                    <div class="secondHalf">
+                        <img :src="cover.mockup_3" />
+                    </div>
                 </div>
             </div>
-            <div class="singleCoverMockups">
-                <div class="firstHalf">
-                    <img :src="cover.mockup_1" class="topMockup" />
-                    <img :src="cover.mockup_2" class="bottomMockup" />
-                </div>
-                <div class="secondHalf">
-                    <img :src="cover.mockup_3" />
-                </div>
-            </div>
-        </div>
+        <!-- </div> -->
+        <!-- <div class="semipolar-spinner" :style="spinnerStyle" v-else>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div> -->
     </div>
 </template>
 
@@ -38,6 +47,9 @@ export default {
     data() {
         return {
             cover:{}, 
+            singleCover:false,
+            normalMode:'normalMode',
+            hiddenMode:'hiddenMode'
         }
     }, 
 
@@ -53,6 +65,7 @@ export default {
             coversService.get(id)
                 .then(response => {
                     this.cover = response.data
+                    this.singleCover = true
                 }).catch(e=>{
                     console.log(e)
             })
@@ -66,6 +79,18 @@ export default {
 </script>
 
 <style>
+
+.hiddenMode {
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.normalMode {
+    opacity: 1;
+    transition: all 0.5s ease-in;
+}
+
+
 .back {
     width: 100%;
     display: flex;
@@ -161,7 +186,6 @@ export default {
     }
 }
 
-
 .singleCoverOriginalText h3 {
     font-family: 'Proza Libre', sans-serif;
     color: #ed1c24;
@@ -248,15 +272,6 @@ export default {
     font-size: 0.9rem;
     text-align: justify;
     margin-top:1.5rem;
-}
-
-hr {
-    border: 0.02rem solid #aa9ac2;
-    width: 100%;
-}
-
-@media (max-width: 1200px) {
-    
 }
 
 @media (max-width: 992px) {

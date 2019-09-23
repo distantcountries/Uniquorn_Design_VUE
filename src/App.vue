@@ -15,7 +15,7 @@
     <div class="footer" id="footerSection">
             <div class="footer_form" v-if="notSentMail">
                 <form @submit.prevent="sendMail">
-                    <h1>You want book cover?</h1>
+                    <h1>Need a book cover?</h1>
                     <input type="text" placeholder="Name*" v-model="newMail.name" class="form-control" required pattern=".{2,}" title="Min 2 characters"/>
                     <input type="email" placeholder="Email*" v-model="newMail.email" class="form-control" required/>
                     <input type="text" placeholder="Subject*" v-model="newMail.subject" class="form-control" required pattern=".{2,}" title="Min 2 characters"/>
@@ -24,7 +24,7 @@
                 </form>
             </div>
             <div class="sentMailMessage" v-if="sentMail">
-                <h1>You mail was sent successfully!</h1>
+                <h1>Your mail was sent successfully!</h1>
             </div>
             <div class="footer_contact">
                 <div class="social_media_icons">
@@ -83,6 +83,14 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Proza+Libre');
+
+html, body, template {
+    background-image: url("./assets/homepage_logo_1.jpg");
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    /* height: 3000px; */
+}
 
 #app {
   -webkit-font-smoothing: antialiased;
@@ -287,8 +295,6 @@ html {
   text-decoration: none;
 }
 
-
-
 /* --------------footer-------------- */
 
 .footer {
@@ -300,6 +306,11 @@ html {
     align-items: flex-start;
 }
 
+@media (min-width: 2240px) {
+    .footer {
+        padding: 5rem 22rem;
+    }
+}
 
 @media (max-width: 2240px) {
     .footer {
@@ -330,10 +341,6 @@ html {
         padding: 0 0 1rem 0;
         flex-direction: column;
     }
-
-    .footer h1 {
-        font-size: 1rem;
-    }
 }
 
 .footer_form, .sentMailMessage  {
@@ -344,7 +351,7 @@ html {
     justify-content: center;
 }
 
- .footer_form form {
+.footer_form form {
     margin-left: 3rem;
     width:100%;
     display: flex;
@@ -352,14 +359,24 @@ html {
     justify-content: flex-start;
 } 
 
+@media (min-width: 2240px) {
+    .footer_form form {
+        margin:0;
+    }
+
+    .footer_form h1 {
+        font-size: 2rem;
+    }
+} 
+
 @media (max-width: 2240px) {
     .footer_form form {
         margin:0;
-        width:100%;
-        padding: 0 1rem 0 5rem;
-        justify-content: flex-start;
     }
 
+    .footer_form h1 {
+        font-size: 1.8rem;
+    }
 } 
 
 @media (max-width: 1200px) {
@@ -369,12 +386,14 @@ html {
 
     .footer_form form {
         margin:0;
-        width:100%;
-        padding: 0 2rem 0 5rem;
+    }
+
+    .footer_form h1 {
+        font-size: 1.5rem;
     }
 } 
 
- @media (max-width: 992px) {
+@media (max-width: 992px) {
     .footer {
         padding: 1rem 3rem;
     }
@@ -387,7 +406,10 @@ html {
     .footer_form form {
         margin-left: 0;
         padding: 1rem;
-        width:100%; 
+    }
+
+    .footer_form h1 {
+        font-size: 1.5rem;
     }
 } 
 
@@ -404,6 +426,10 @@ html {
         flex-direction: column;
         justify-content: center;
     }
+
+    .footer_form h1 {
+        font-size: 1.4rem;
+    }
 } 
 
 .footer input, .footer textarea {
@@ -411,7 +437,6 @@ html {
     margin-bottom: 0.5rem;
     color:#aa9ac2;
 }
-
 
 .footer form button {
     padding: 0.4rem;
@@ -464,7 +489,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 2rem;
+    /* padding: 0 2rem; */
 }
 
 .footer_contact p {
@@ -530,7 +555,6 @@ input:focus {
     .social_media_icons a {
         padding: 0.5rem;
     }
-
 }
 
 @media (max-width: 2240px) {
@@ -541,9 +565,6 @@ input:focus {
     .social_media_icons a {
         padding: 0.5rem;
     }
-}
-
-@media (max-width: 1200px) {
 }
 
 @media (max-width: 992px) {

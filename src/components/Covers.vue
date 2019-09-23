@@ -1,26 +1,35 @@
 <template>
     <div class="container">
-        <div id="book_covers_title">
-            <div class="titles">
-                <h1>Book covers</h1>
-                <div class="title_rectangular"></div>
+        <div v-if="allCovers">
+            <div id="book_covers_title">
+                <div class="titles">
+                    <h1>Book covers</h1>
+                    <div class="title_rectangular"></div>
+                </div>
+            </div>
+            <div class="all_covers" >
+                <div v-for="(cover, index) in covers" :key="index" class="single_image">
+                    <router-link :to="singleCover(cover)">
+                        <div class="cover_hover">
+                            <img :src="cover.original_cover" alt="cover.title">
+                            <div class="overlay">
+                                <p>
+                                    {{ cover.title }}<br />
+                                    {{ cover.subtitle }}
+                                </p>
+                            </div>
+                        </div> 
+                    </router-link>
+                </div>
             </div>
         </div>
-        <div class="all_covers" >
-            <div v-for="(cover, index) in covers" :key="index" class="single_image">
-                <router-link :to="singleCover(cover)">
-                    <div class="cover_hover">
-                        <img :src="cover.original_cover" alt="cover.title">
-                        <div class="overlay">
-                            <p>
-                                {{ cover.title }}<br />
-                                {{ cover.subtitle }}
-                            </p>
-                        </div>
-                    </div> 
-                </router-link>
-            </div>
-        </div>
+        <div class="semipolar-spinner" :style="spinnerStyle" v-if="loading">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div> 
     </div>
 </template>
 <script>
@@ -28,7 +37,9 @@ import { coversService } from '../services/CoversService'
 export default {
     data() {
         return {
-            covers:[]
+            covers:[],
+            loading:true,
+            allCovers:false,
         }
     },
 
@@ -36,6 +47,8 @@ export default {
         coversService.getAll()
         .then(response => {
             this.covers = response.data
+            this.loading = false
+            this.allCovers = true
         })
         .catch(() => {
             console.log('Response data covers invalid!')
@@ -63,6 +76,7 @@ export default {
         justify-content: center;
         align-items: center;
     }
+
 
     @media (max-width: 480px) {
         .titles  {
@@ -181,6 +195,81 @@ export default {
             width:100%;
             padding: 0.5rem 1.5rem;
         }
+
+        /* .book_covers_title .titles h1 {
+            font-size: 1em;
+        } */
+    }
+
+/* --------------loading-------------- */
+    .semipolar-spinner, .semipolar-spinner * {
+      box-sizing: border-box;
+    }
+
+    .semipolar-spinner {
+      height: 65px;
+      width: 65px;
+      position: relative;
+    }
+
+    .semipolar-spinner .ring {
+      border-radius: 50%;
+      position: absolute;
+      border: calc(65px * 0.05) solid transparent;
+      border-top-color: #ff1d5e;
+      border-left-color: #ff1d5e;
+      animation: semipolar-spinner-animation 2s infinite;
+    }
+
+    .semipolar-spinner .ring:nth-child(1) {
+      height: calc(65px - 65px * 0.2 * 0);
+      width: calc(65px - 65px * 0.2 * 0);
+      top: calc(65px * 0.1 * 0);
+      left: calc(65px * 0.1 * 0);
+      animation-delay: calc(2000ms * 0.1 * 4);
+      z-index: 5;
+    }
+
+    .semipolar-spinner .ring:nth-child(2) {
+      height: calc(65px - 65px * 0.2 * 1);
+      width: calc(65px - 65px * 0.2 * 1);
+      top: calc(65px * 0.1 * 1);
+      left: calc(65px * 0.1 * 1);
+      animation-delay: calc(2000ms * 0.1 * 3);
+      z-index: 4;
+    }
+
+    .semipolar-spinner .ring:nth-child(3) {
+      height: calc(65px - 65px * 0.2 * 2);
+      width: calc(65px - 65px * 0.2 * 2);
+      top: calc(65px * 0.1 * 2);
+      left: calc(65px * 0.1 * 2);
+      animation-delay: calc(2000ms * 0.1 * 2);
+      z-index: 3;
+    }
+
+    .semipolar-spinner .ring:nth-child(4) {
+      height: calc(65px - 65px * 0.2 * 3);
+      width: calc(65px - 65px * 0.2 * 3);
+      top: calc(65px * 0.1 * 3);
+      left: calc(65px * 0.1 * 3);
+      animation-delay: calc(2000ms * 0.1 * 1);
+      z-index: 2;
+    }
+
+    .semipolar-spinner .ring:nth-child(5) {
+      height: calc(65px - 65px * 0.2 * 4);
+      width: calc(65px - 65px * 0.2 * 4);
+      top: calc(65px * 0.1 * 4);
+      left: calc(65px * 0.1 * 4);
+      animation-delay: calc(2000ms * 0.1 * 0);
+      z-index: 1;
+    }
+
+    @keyframes semipolar-spinner-animation {
+      50% {
+        transform: rotate(360deg) scale(0.7);
+      }
     }
 
 /* --------------overlay content-------------- */
@@ -194,12 +283,12 @@ export default {
         width: 100%;
         height: 0;
         border-radius: 0 0 0.3rem 0.3rem;
+        cursor: url("../assets/cursor.png"), auto;
     }
             
     .cover_hover {
         position: relative;
         width: 100%;
-        
     }
 
     .cover_hover:hover .overlay {
@@ -226,6 +315,7 @@ export default {
     #book_covers_title h1 {
         width: 100%;
         text-align: justify;
+        font-size:2rem;
     }
 
     @media (min-width: 1220px) {

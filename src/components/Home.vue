@@ -29,6 +29,7 @@
                 <div id="subscribeMessage" v-if="subscribed">
                     <h1>Thank you for subscribing!</h1>
                 </div>
+                <h2 style="color:#ed1c24;">{{ errorMessage }}</h2>
             </div>
         </div> 
     </div>
@@ -43,7 +44,8 @@ export default {
                 email:''
             }, 
             subscribed:false,
-            notSubscribed:true
+            notSubscribed:true,
+            errorMessage:'',
         }
     },
 
@@ -60,17 +62,16 @@ export default {
                 this.subscribed = true
                 this.notSubscribed = false
             })
+            .catch(() => {
+                this.errorMessage = 'This email is already subscribed!';
+                this.notSubscribed = false
+            })
         }, 
     },
 }
 </script>
 
 <style>
-body {
-    background-image: url("../assets/homepage_logo_1.jpg");
-    background-size: cover;
-}
-
 h1 {
     font-family: 'Proza Libre', sans-serif;
     color: #ed1c24;
@@ -131,6 +132,7 @@ p {
     justify-content: center;
     margin:0 auto;
 }
+
 
 @media (min-width: 2240px) {
     #homepage_logo {
@@ -222,6 +224,10 @@ p {
     text-align: justify;
 }
 
+#newsletter_about .titles {
+    padding: 0;
+}
+
 #newsletter {
     background-color: #290959;
     border-radius: 2rem;
@@ -234,9 +240,6 @@ p {
     padding: 2rem;
 }
 
-@media (min-width: 2240px) {
-
-}
 @media (max-width: 2240px) {
     #newsletter {
        width: 60%; 
@@ -295,7 +298,7 @@ p {
         font-size: 0.8rem;
     }
 
-    h1 {
+    #newsletter h1 {
         font-size: 1.2rem;
     }
 
@@ -341,8 +344,6 @@ p {
     outline:none;
 }
 
-
-
 #newsletter_form {
     width: 70%;
     height: 100%;
@@ -355,6 +356,10 @@ p {
     #newsletter_form {
         width: 90%;
         flex-direction: column;
+    }
+
+    #newsletter_form h1 {
+        text-align: center;
     }
 }
 
