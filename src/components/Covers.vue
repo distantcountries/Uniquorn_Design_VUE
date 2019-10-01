@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="semipolar-spinner" :style="spinnerStyle" v-if="loading">
+        <div class="semipolar-spinner"  v-if="loading">
             <div class="ring"></div>
             <div class="ring"></div>
             <div class="ring"></div>
@@ -64,6 +64,7 @@ export default {
 </script>
 
 <style>
+/* --------------covers-------------- */
     .container {
         margin-top:2rem;
         margin-bottom:2rem;
@@ -75,13 +76,6 @@ export default {
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-    }
-
-
-    @media (max-width: 480px) {
-        .titles  {
-            padding: 0;
-        }
     }
 
     .all_covers {
@@ -104,8 +98,8 @@ export default {
     .single_image {
         width: 19%;
         height: 19%;
-        margin-bottom: 1%;
-        margin-right: 1%;
+        margin-bottom: 1rem;
+        margin-right: 1rem;
     }
 
     .single_image img {
@@ -115,6 +109,7 @@ export default {
         box-shadow: 0.4rem 0.4rem 0.2rem 0 rgba(0,0,0,0.3);
     }
 
+/* --------------responsive covers-------------- */
     @media (min-width: 1220px) {
         .all_covers {
             flex-direction:row;
@@ -135,10 +130,6 @@ export default {
             justify-content: center;
         }
 
-        .all_covers img {
-            filter: none;
-        }
-
         .single_image {
             width:23%;
             padding: 0.3rem;
@@ -149,36 +140,15 @@ export default {
         .container {
             padding: 0.5rem;
         }
-        .all_covers {
-            flex-direction:row;
-            padding: 0 0.5rem;
-            justify-content: center;
-        }
-
-        .all_covers img {
-            filter: none;
-        }
 
         .single_image {
-            width:32%;
-            padding: 0.3rem;
+            width:30%;
         }
     }
 
     @media (max-width: 710px) {
-        .all_covers {
-            flex-direction:row;
-            padding: 0 0.5rem;
-            justify-content: center;
-        }
-
-        .all_covers img {
-            filter: none;
-        }
-
         .single_image {
             width:45%;
-            padding: 0.3rem;
         }
     }
 
@@ -187,19 +157,96 @@ export default {
             flex-direction: column;
         }
 
-        .all_covers img {
-            filter: none;
-        }
-
         .single_image {
             width:100%;
             padding: 0.5rem 1.5rem;
         }
 
-        /* .book_covers_title .titles h1 {
-            font-size: 1em;
-        } */
+        .all_covers img {
+            filter: none;
+        }
+    } 
+
+/* --------------overlay content-------------- */
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color:rgba(6, 1, 20, 0.7);
+        width: 100%;
+        height: 0;
+        border-radius: 0 0 0.3rem 0.3rem;
+        cursor: url("../assets/cursor.png"), auto;
     }
+            
+    .cover_hover {
+        position: relative;
+        width: 100%;
+    }
+
+    .cover_hover:hover .overlay {
+        height: 30%;
+    }
+
+    .overlay p {
+        color: #aa9ac2;
+        font-size: 0.8rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    #book_covers_title {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content:flex-start;
+    }
+
+    #book_covers_title h1 {
+        width: 100%;
+        text-align: justify;
+        font-size:2rem;
+    }
+
+/* --------------responsive overlay content-------------- */
+    @media (min-width: 480px) {
+        .titles {
+            padding: 0 3rem;
+        }
+
+        .overlay {
+            overflow: hidden;
+            transition: .5s ease;
+        }
+
+        .overlay p {
+            color: #aa9ac2;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    } 
+
+    @media (max-width: 480px) and (min-width: 300px) {
+        .titles {
+            padding: 0 1.5rem;
+        }
+
+        .overlay {
+            height: 35%;
+        }
+
+        .overlay p {
+            font-size: 0.8rem;
+        }
+    } 
 
 /* --------------loading-------------- */
     .semipolar-spinner, .semipolar-spinner * {
@@ -271,122 +318,4 @@ export default {
         transform: rotate(360deg) scale(0.7);
       }
     }
-
-/* --------------overlay content-------------- */
-
-    .overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color:rgba(6, 1, 20, 0.7);
-        width: 100%;
-        height: 0;
-        border-radius: 0 0 0.3rem 0.3rem;
-        cursor: url("../assets/cursor.png"), auto;
-    }
-            
-    .cover_hover {
-        position: relative;
-        width: 100%;
-    }
-
-    .cover_hover:hover .overlay {
-        height: 30%;
-    }
-
-    .overlay p {
-        color: #aa9ac2;
-        font-size: 0.8rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-
-    #book_covers_title {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content:flex-start;
-    }
-
-    #book_covers_title h1 {
-        width: 100%;
-        text-align: justify;
-        font-size:2rem;
-    }
-
-    @media (min-width: 1220px) {
-        .titles {
-            padding: 0 3rem;
-        }
-
-        .overlay {
-            overflow: hidden;
-            transition: .5s ease;
-        }
-
-        .overlay p {
-            color: #aa9ac2;
-            font-size: 0.8rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-    } 
-
-    @media (max-width: 1220px) {
-        .titles {
-            padding: 0 2rem;
-        }
-
-        .overlay {
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color:rgba(6, 1, 20, 0.7);
-            width: 100%;
-            height: 30%;
-            border-radius: 0 0 0.3rem 0.3rem;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .titles {
-            padding: 0 1rem;
-        }
-
-        .overlay {
-            height: 40%;
-        }
-    }
-
-    @media (max-width: 710px) {
-        .titles {
-            padding: 0 2rem;
-        }
-
-        .overlay {
-            height: 30%;
-        }
-    }
-
-    @media (max-width: 480px) and (min-width: 300px) {
-        .titles {
-            padding: 0 1.5rem;
-        }
-
-        .overlay {
-            height: 35%;
-        }
-
-        .overlay p {
-            font-size: 0.8rem;
-        }
-    }
-
 </style>

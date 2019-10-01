@@ -29,7 +29,7 @@
                 <div id="subscribeMessage" v-if="subscribed">
                     <h1>Thank you for subscribing!</h1>
                 </div>
-                <h2 style="color:#ed1c24;">{{ errorMessage }}</h2>
+                <h2 style="color:#ed1c24; text-align:center;" class="alreadySubscribedMessage">{{ errorMessage }}</h2>
             </div>
         </div> 
     </div>
@@ -72,50 +72,11 @@ export default {
 </script>
 
 <style>
-h1 {
-    font-family: 'Proza Libre', sans-serif;
-    color: #ed1c24;
-    font-weight: 300;
-    font-size: 2rem;
-}
-
-.titles {
-    margin-bottom: 1.5rem;
-}
-
-.title_rectangular {
-    width: 1rem;
-    height: 0.3rem;
-    background: #ed1c24;
-    margin-top: -0.8rem;
-}
-
-@media (max-width: 992px) {
-    .title_rectangular {
-        height: 0.2rem;
-    }
-}
-
-@media (max-width: 480px) and (min-width: 300px) {
-    .title_rectangular {
-        height: 0.2rem;
-        width: 0.9rem;
-    }
-}
-
-p {
-    font-family: 'Proza Libre', sans-serif;
-    color: #9c8db3;
-    font-size: 1.2rem;
-    text-align: justify;
-}
-
+/* --------------logo section-------------- */
 .home {
     margin: 0 auto;
     box-sizing: border-box;
 }
-
-/* --------------logo section-------------- */
 
 #homepage_logo {
     width: 100%;
@@ -133,14 +94,19 @@ p {
     margin:0 auto;
 }
 
+.logo_image {
+    pointer-events: none;
+    width: 30%;
+}
 
+.logo_text {
+     width: 80%;
+}
+
+/* --------------logo section responsive-------------- */
 @media (min-width: 2240px) {
     #homepage_logo {
         min-height: 1200px;
-    }
-
-    #logo {
-        width: 35%;
     }
 }
 
@@ -172,18 +138,7 @@ p {
     }
 }
 
-.logo_image {
-    pointer-events: none;
-    width: 30%;
-}
-
-.logo_text {
-     width: 80%;
-}
-
-
 /* --------------about section-------------- */
-
 #homepage_about {
     background-color: rgba(6, 1, 20, 0.8);
     padding: 5rem 10rem;
@@ -192,24 +147,6 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-@media (max-width: 2240px) {
-    #homepage_about {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 992px) {
-    #homepage_about {
-        padding: 2rem;
-    }
-}
-
-@media (max-width: 672px) {
-    #homepage_about {
-        padding: 2rem 1rem;
-    }
 }
 
 #newsletter_about {
@@ -228,6 +165,31 @@ p {
     padding: 0;
 }
 
+h1 {
+    font-family: 'Proza Libre', sans-serif;
+    color: #ed1c24;
+    font-weight: 300;
+    font-size: 2rem;
+}
+
+.titles {
+    margin-bottom: 1.5rem;
+}
+
+.title_rectangular {
+    width: 1rem;
+    height: 0.3rem;
+    background: #ed1c24;
+    margin-top: -0.8rem;
+}
+
+p {
+    font-family: 'Proza Libre', sans-serif;
+    color: #9c8db3;
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
 #newsletter {
     background-color: #290959;
     border-radius: 2rem;
@@ -240,78 +202,19 @@ p {
     padding: 2rem;
 }
 
-@media (max-width: 2240px) {
-    #newsletter {
-       width: 60%; 
-    }
-}
-
-@media (max-width: 1200px) {
-    #newsletter {
-       width: 60%; 
-    }
-}
-
-@media (max-width: 992px) {
-    #newsletter {
-        border-radius: 1rem;
-        flex-direction: column;
-        width: 60%;
-        padding: 1rem;
-    }
-
-    #subscribeMessage h1 {
-        font-size: 1.4rem;
-    }
-}
-
-@media (max-width: 672px) {
-    #newsletter {
-        width: 75%;
-        padding: 1rem;
-    }
-
-    #newsletter_about {
-        width: 80%;
-    }
-
-    #newsletter_about p, #newsletter_form p {
-        font-size: 1rem;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) and (min-width: 300px) {
-    #newsletter {
-        width: 90%;
-        padding: 0.7rem 0.5rem;
-    }
-
-    #newsletter_about {
-        width: 90%;
-    }
-
-    #newsletter_about p, #newsletter_form p {
-        font-size: 0.8rem;
-    }
-
-    #newsletter h1 {
-        font-size: 1.2rem;
-    }
-
-    #subscribeMessage h1 {
-        font-size: 1rem;
-    }
-}
-
 #newsletter_icon {
     width: 30%;
     display: flex;
     justify-content: center;
 } 
+
+#newsletter_form {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+}
 
 #newsletter input {
     background-color: #290959;
@@ -344,25 +247,6 @@ p {
     outline:none;
 }
 
-#newsletter_form {
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: flex-start;
-}
-
-@media (max-width: 992px) {
-    #newsletter_form {
-        width: 90%;
-        flex-direction: column;
-    }
-
-    #newsletter_form h1 {
-        text-align: center;
-    }
-}
-
 #newsletter_insert_email {
     width: 70%;
     height: 100%;
@@ -375,7 +259,20 @@ p {
     width:60%;
 }
 
+.alreadySubscribedMessage {
+    font-size:1.5rem;
+}
+
+/* --------------about section responsive-------------- */
 @media (max-width: 2240px) {
+    #homepage_about {
+        padding: 1.5rem;
+    }
+
+    #newsletter {
+       width: 60%; 
+    }
+
     #newsletter_insert_email {
         width: 100%;
     }
@@ -383,9 +280,17 @@ p {
     #newsletter_insert_email input {
         width:60%;
     }
+
+    .alreadySubscribedMessage {
+        font-size:2rem;
+    }
 }
 
 @media (max-width: 1200px) {
+    #newsletter {
+       width: 60%; 
+    }
+
     #newsletter_insert_email {
         width: 100%;
     }
@@ -396,6 +301,26 @@ p {
 }
 
 @media (max-width: 992px) {
+    .title_rectangular {
+        height: 0.2rem;
+    }
+
+    #homepage_about {
+        padding: 2rem;
+    }
+
+    #newsletter {
+        border-radius: 1rem;
+        flex-direction: column;
+        width: 60%;
+        padding: 1rem;
+    }
+
+    #newsletter_form {
+        width: 90%;
+        flex-direction: column;
+    }
+
     #newsletter_insert_email {
         width: 100%;
     }
@@ -403,9 +328,30 @@ p {
     #newsletter_insert_email input {
         width:70%;
     }
+
+    #newsletter_form h1 {
+        text-align: center;
+    }
+
+    #subscribeMessage h1 {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 672px) {
+    #homepage_about {
+        padding: 2rem 1rem;
+    }
+
+    #newsletter {
+        width: 75%;
+        padding: 1rem;
+    }
+
+    #newsletter_about {
+        width: 80%;
+    }
+
     #newsletter_insert_email {
         width: 100%;
         justify-content: center;
@@ -423,9 +369,39 @@ p {
         width: 100%;
         border-radius: 0.5rem;
     }
-}
+
+    #newsletter_about p, #newsletter_form p {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+} 
 
 @media (max-width: 480px) and (min-width: 300px) {
+    .title_rectangular {
+        height: 0.2rem;
+        width: 0.9rem;
+    }
+
+    #newsletter {
+        width: 90%;
+        padding: 0.7rem 0.5rem;
+    }
+
+    #newsletter_about {
+        width: 90%;
+    }
+
+    #subscribeMessage h1 {
+        font-size: 1rem;
+    }
+
+    .alreadySubscribedMessage {
+        font-size:1rem;
+    }
+
     #newsletter_insert_email input {
         font-size: 0.7rem;
         border-radius: 0.3rem;
@@ -435,6 +411,13 @@ p {
         font-size: 0.7rem;
         border-radius: 0.3rem;
     }
-}
 
+    #newsletter_about p, #newsletter_form p {
+        font-size: 0.8rem;
+    }
+
+    #newsletter h1 {
+        font-size: 1.2rem;
+    }
+}
 </style>

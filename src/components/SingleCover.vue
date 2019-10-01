@@ -1,43 +1,34 @@
 <template>
     <div class="container" v-bind:class="[singleCover ? normalMode : hiddenMode]">
-        <!-- <div v-if="singleCover" v-bind:class="[singleCover ? normalMode : hiddenMode]" > -->
-            <div id="book_covers_title"></div>
-            <div class="back">
-                <button @click="$router.go(-1)" class="backButton">Back</button>
-            </div>
-            <div>
-                <div class="singleCoverOriginal">
-                    <img :src="cover.original_cover" />
-                    <div class="singleCoverOriginalText">
-                        <h3>{{ cover.title }}</h3>
-                        <h4 v-if="cover.subtitle">{{ cover.subtitle }}</h4>
-                        <hr style="border-top: 1px solid #aa9ac2; width: 100%;" />
-                        <p class="cover_content">{{ cover.other_content }}</p>
-                        <div class="author">
-                            <p class="author_name">by {{ cover.author }}</p>
-                        </div>
-                        <button @click="goToLink(cover.id)" class="amazonLink" v-if="cover.link">Check the book</button>
-                        <p v-else>This book is waiting for publishing</p>
+        <div id="book_covers_title"></div>
+        <div class="back">
+            <button @click="$router.go(-1)" class="backButton">Back</button>
+        </div>
+        <div>
+            <div class="singleCoverOriginal">
+                <img :src="cover.original_cover" />
+                <div class="singleCoverOriginalText">
+                    <h3>{{ cover.title }}</h3>
+                    <h4 v-if="cover.subtitle">{{ cover.subtitle }}</h4>
+                    <hr style="border-top: 1px solid #aa9ac2; width: 100%;" />
+                    <p class="cover_content">{{ cover.other_content }}</p>
+                    <div class="author">
+                        <p class="author_name">by {{ cover.author }}</p>
                     </div>
-                </div>
-                <div class="singleCoverMockups">
-                    <div class="firstHalf">
-                        <img :src="cover.mockup_1" class="topMockup" />
-                        <img :src="cover.mockup_2" class="bottomMockup" />
-                    </div>
-                    <div class="secondHalf">
-                        <img :src="cover.mockup_3" />
-                    </div>
+                    <button @click="goToLink(cover.id)" class="amazonLink" v-if="cover.link">Check the book</button>
+                    <p v-else>This book is waiting for publishing</p>
                 </div>
             </div>
-        <!-- </div> -->
-        <!-- <div class="semipolar-spinner" :style="spinnerStyle" v-else>
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <div class="ring"></div>
-        </div> -->
+            <div class="singleCoverMockups">
+                <div class="firstHalf">
+                    <img :src="cover.mockup_1" class="topMockup" />
+                    <img :src="cover.mockup_2" class="bottomMockup" />
+                </div>
+                <div class="secondHalf">
+                    <img :src="cover.mockup_3" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -79,7 +70,6 @@ export default {
 </script>
 
 <style>
-
 .hiddenMode {
     opacity: 0;
     transition: all 0.5s ease-out;
@@ -89,7 +79,6 @@ export default {
     opacity: 1;
     transition: all 0.5s ease-in;
 }
-
 
 .back {
     width: 100%;
@@ -138,52 +127,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-@media (max-width: 992px) {
-    .singleCoverOriginal, .singleCoverMockups {
-        width: 100%;
-        padding: 1rem 1rem 0 1rem;
-        flex-direction: column;
-    }
-
-    .singleCoverOriginal img {
-        width: 100%;
-        border-radius: 1.5rem;
-        pointer-events: none;
-    }
-
-    .singleCoverOriginalText {
-        margin-top:1rem;
-        width: 100%;
-        border-radius: 1.5rem;
-    }
-
-    .backButton {
-        padding: 0.3rem;
-        width: 20%;
-    }
-}
-
-@media (max-width: 480px) and (min-width: 300px) {
-    .singleCoverOriginal, .singleCoverMockups {
-        padding: 0.5rem 0.5rem 0 0.5rem;
-    }
-
-    .singleCoverOriginal img {
-        border-radius: 0.5rem;
-    }
-
-    .singleCoverOriginalText {
-        margin-top:0.5rem;
-        border-radius: 0.5rem;
-    }
-
-    .backButton {
-        padding: 0.2rem;
-        font-size: 0.9rem;
-        width: 30%;
-    }
 }
 
 .singleCoverOriginalText h3 {
@@ -274,7 +217,31 @@ export default {
     margin-top:1.5rem;
 }
 
+/* --------------responsive-------------- */
 @media (max-width: 992px) {
+    .singleCoverOriginal, .singleCoverMockups {
+        width: 100%;
+        padding: 1rem 1rem 0 1rem;
+        flex-direction: column;
+    }
+
+    .singleCoverOriginal img {
+        width: 100%;
+        border-radius: 1.5rem;
+        pointer-events: none;
+    }
+
+    .singleCoverOriginalText {
+        margin-top:1rem;
+        width: 100%;
+        border-radius: 1.5rem;
+    }
+
+    .backButton {
+        padding: 0.3rem;
+        width: 20%;
+    }
+
     .singleCoverMockups .secondHalf, .singleCoverMockups .firstHalf  {
         width: 100%;
         height: auto;
@@ -293,6 +260,25 @@ export default {
 }
 
 @media (max-width: 480px) and (min-width: 300px) {
+    .singleCoverOriginal, .singleCoverMockups {
+        padding: 0.5rem 0.5rem 0 0.5rem;
+    }
+
+    .singleCoverOriginal img {
+        border-radius: 0.5rem;
+    }
+
+    .singleCoverOriginalText {
+        margin-top:0.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .backButton {
+        padding: 0.2rem;
+        font-size: 0.9rem;
+        width: 30%;
+    }
+
     .singleCoverMockups img {
         border-radius: 0.5rem;
         margin-bottom: 0.5rem;
@@ -320,5 +306,4 @@ export default {
         font-size: 0.9rem;
     }
 }
-
 </style>

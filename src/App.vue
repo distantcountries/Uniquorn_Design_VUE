@@ -1,18 +1,18 @@
 <template>
-  <div id="app">
-    <div class="nav">
-      <div class="nav_logo">
-        <img src="./assets/logo_nav.png" class="nav_logo_logo" ><br />
-        <img src="./assets/logo_text_nav.png" class="nav_logo_text" >
-      </div>
-      <div class="nav_links">
-        <router-link to="/">About </router-link> 
-        <router-link to="/covers">Book covers </router-link>
-        <a href="#footerSection">Contact</a>
-      </div>
-    </div>
-    <router-view/>
-    <div class="footer" id="footerSection">
+    <div id="app">
+        <div class="nav">
+            <div class="nav_logo">
+                <img src="./assets/logo_nav.png" class="nav_logo_logo" ><br />
+                <img src="./assets/logo_text_nav.png" class="nav_logo_text" >
+            </div>
+            <div class="nav_links">
+                <router-link to="/">About </router-link> 
+                <router-link to="/covers">Book covers </router-link>
+                <a href="#footerSection">Contact</a>
+            </div>
+        </div>
+        <router-view/>
+        <div class="footer" id="footerSection">
             <div class="footer_form" v-if="notSentMail">
                 <form @submit.prevent="sendMail">
                     <h1>Need a book cover?</h1>
@@ -36,12 +36,12 @@
                 </div>
                 <p>
                     uniquorn.design@gmail.com <br/>
-                    Almaska 8, Novi Sad <br/>
+                    Partizanska bb, Novi Sad <br/>
                     063/ 00 11 123
                 </p>
             </div>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -75,6 +75,7 @@ export default {
                 this.mailsService = this.getDefaults();
                 this.sentMail = true;
                 this.notSentMail = false;
+                window.location.reload()
             })
         }
     }
@@ -89,7 +90,6 @@ html, body, template {
     background-size: cover;
     background-repeat:no-repeat;
     background-position:center;
-    /* height: 3000px; */
 }
 
 #app {
@@ -135,13 +135,28 @@ html {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
+}
 
+.nav_links a {
+    font-family: 'Proza Libre', sans-serif;
+    color: #ed1c24;
+    font-weight: 300;
+    width: 33%;
+    text-align: center;
+}
+
+.nav_links a:hover {
+  font-family: 'Proza Libre', sans-serif;
+  color:rgba(237, 28, 36, 0.5);
+  font-weight: 300;
+  text-decoration: none;
 }
 
 @media (min-width: 2240px) {
     .nav {
         padding: 1.5rem 0;
     }
+
     .nav_links {
         margin-right: 10rem;
         width:33%;
@@ -280,23 +295,7 @@ html {
     }
 }
 
-.nav_links a {
-        font-family: 'Proza Libre', sans-serif;
-        color: #ed1c24;
-        font-weight: 300;
-        width: 33%;
-        text-align: center;
-    }
-
-.nav_links a:hover {
-  font-family: 'Proza Libre', sans-serif;
-  color:rgba(237, 28, 36, 0.5);
-  font-weight: 300;
-  text-decoration: none;
-}
-
 /* --------------footer-------------- */
-
 .footer {
     padding: 5rem 25rem;
     width: 100%;
@@ -304,43 +303,6 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-}
-
-@media (min-width: 2240px) {
-    .footer {
-        padding: 5rem 22rem;
-    }
-}
-
-@media (max-width: 2240px) {
-    .footer {
-        padding: 4rem 20rem;
-    }
-}
-
-@media (max-width: 1500px) {
-    .footer {
-        padding: 4rem 10rem;
-    }
-}
-
-@media (max-width: 1200px) {
-    .footer {
-        padding: 2rem;
-    }
-}
-
-@media (max-width: 992px) {
-    .footer {
-        padding: 2rem 5rem;
-    }
-}
-
-@media (max-width: 480px) and (min-width: 300px) {
-    .footer {
-        padding: 0 0 1rem 0;
-        flex-direction: column;
-    }
 }
 
 .footer_form, .sentMailMessage  {
@@ -351,86 +313,17 @@ html {
     justify-content: center;
 }
 
+.sentMailMessage h1 {
+    font-size: 2.5rem;
+}
+
 .footer_form form {
     margin-left: 3rem;
     width:100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-} 
-
-@media (min-width: 2240px) {
-    .footer_form form {
-        margin:0;
-    }
-
-    .footer_form h1 {
-        font-size: 2rem;
-    }
-} 
-
-@media (max-width: 2240px) {
-    .footer_form form {
-        margin:0;
-    }
-
-    .footer_form h1 {
-        font-size: 1.8rem;
-    }
-} 
-
-@media (max-width: 1200px) {
-    .footer_form, .sentMailMessage {
-        width: 55%;
-    }
-
-    .footer_form form {
-        margin:0;
-    }
-
-    .footer_form h1 {
-        font-size: 1.5rem;
-    }
-} 
-
-@media (max-width: 992px) {
-    .footer {
-        padding: 1rem 3rem;
-    }
-
-    .footer_form, .sentMailMessage {
-        width: 90%;
-        justify-content: center;
-    }
-
-    .footer_form form {
-        margin-left: 0;
-        padding: 1rem;
-    }
-
-    .footer_form h1 {
-        font-size: 1.5rem;
-    }
-} 
-
-@media (max-width: 480px) and (min-width: 300px) {
-    .footer_form, .sentMailMessage {
-        width: 100%;
-        padding: 0;
-        justify-content: center;
-    }
-
-    .footer_form form {
-        width:100%;
-        padding: 0;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .footer_form h1 {
-        font-size: 1.4rem;
-    }
-} 
+}
 
 .footer input, .footer textarea {
     background-color:transparent;
@@ -448,34 +341,6 @@ html {
     font-weight: bold;
 }
 
-@media (max-width: 992px) {
-    .footer form button {
-        width: 100%;
-    }
-
-    .sentMailMessage h1 {
-        padding-top: 1rem;
-        text-align: center;
-        margin-bottom: -1rem;
-    }
-} 
-
-@media (max-width: 480px) and (min-width: 300px) {
-    .footer input, .footer textarea {
-        font-size: 0.7rem;
-    }
-
-    .footer form button {
-        font-size: 0.7rem;
-    }
-
-    .sentMailMessage h1 {
-        padding-top: 1rem;
-        text-align: center;
-        margin-bottom: -1rem;
-    }
-}
-
 .footer form button:hover {
     opacity:0.5;
 }
@@ -489,46 +354,12 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* padding: 0 2rem; */
 }
 
 .footer_contact p {
     width: 100%;
     flex-direction: column;
     text-align: right;
-}
-
-
-@media (max-width: 992px) {
-    .footer_contact {
-        width: 100%;
-        flex-direction: column;
-        text-align: center;
-        padding-top: 2rem;
-    } 
-
-    .footer_contact p {
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) and (min-width: 300px) {
-    .footer {
-        padding: 0 2rem;
-    }
-
-    .footer_contact {
-        width: 100%;
-        flex-direction: column;
-        padding-top: 2rem;
-    } 
-
-    .footer_contact p {
-        width: 100%;
-        flex-direction: column;
-        text-align: center;
-        font-size: 0.8rem;
-    }
 }
 
 .social_media_icons {
@@ -548,6 +379,18 @@ input:focus {
 }
 
 @media (min-width: 2240px) {
+    .footer {
+        padding: 5rem 22rem;
+    }
+
+    .footer_form form {
+        margin:0;
+    }
+
+    .footer_form h1 {
+        font-size: 2rem;
+    }
+
     .social_media_icons {
         justify-content: flex-end;
     }
@@ -558,6 +401,18 @@ input:focus {
 }
 
 @media (max-width: 2240px) {
+    .footer {
+        padding: 4rem 20rem;
+    }
+
+    .footer_form form {
+        margin:0;
+    }
+
+    .footer_form h1 {
+        font-size: 1.8rem;
+    }
+
     .social_media_icons {
         justify-content: flex-end;
     }
@@ -567,13 +422,137 @@ input:focus {
     }
 }
 
+@media (max-width: 1500px) {
+    .footer {
+        padding: 4rem 10rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .footer {
+        padding: 2rem;
+    }
+
+    .footer_form, .sentMailMessage {
+        width: 55%;
+    }
+
+    .footer_form form {
+        margin:0;
+    }
+
+    .footer_form h1 {
+        font-size: 1.5rem;
+    }
+
+    .sentMailMessage h1 {
+        font-size: 2.3rem;
+    }
+}
+
 @media (max-width: 992px) {
+    .footer {
+        padding: 1rem 3rem;
+    }
+
+    .footer_form, .sentMailMessage {
+        width: 90%;
+        justify-content: center;
+    }
+
+    .footer_form form {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .footer_form h1 {
+        font-size: 1.5rem;
+    }
+
+    .sentMailMessage h1 {
+        font-size: 2rem;
+    }
+
+    .footer form button {
+        width: 100%;
+    }
+
+    .sentMailMessage h1 {
+        padding-top: 1rem;
+        text-align: center;
+        margin-bottom: -1rem;
+    }
+
+    .footer_contact {
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+    } 
+
+    .footer_contact p {
+        text-align: center;
+    }
+
     .social_media_icons {
         justify-content: center;
     }
 }
 
 @media (max-width: 480px) and (min-width: 300px) {
+    .footer {
+        padding: 0 2rem;
+        flex-direction: column;
+    }
+
+    .footer_form, .sentMailMessage {
+        width: 100%;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .footer_form form {
+        width:100%;
+        padding: 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .footer_form h1 {
+        font-size: 1.4rem;
+    }
+
+    .sentMailMessage h1 {
+        font-size: 1rem;
+    }
+
+    .footer input, .footer textarea {
+        font-size: 0.7rem;
+    }
+
+    .footer form button {
+        font-size: 0.7rem;
+    }
+
+    .sentMailMessage h1 {
+        padding-top: 1rem;
+        text-align: center;
+        margin-bottom: -1rem;
+    }
+
+    .footer_contact {
+        width: 100%;
+        flex-direction: column;
+        padding-top: 2rem;
+    } 
+
+    .footer_contact p {
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+
     .footer_contact {
         width: 100%;
         padding: 0;
@@ -583,5 +562,5 @@ input:focus {
         padding: 0 3rem;
         margin: 0.7rem 0 0.3rem;
     }
-}
+}  
 </style>
