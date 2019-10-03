@@ -80,7 +80,7 @@ export default {
 
 #homepage_logo {
     width: 100%;
-    height: 768px;
+    min-height: 830px;
     position: relative;
     display: flex;
     align-items: center;
